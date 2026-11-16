@@ -31,12 +31,13 @@ import java.lang.reflect.Method;
 @Mod(EternalColoniesCompat.MOD_ID)
 public final class EternalColoniesCompat {
     public static final String MOD_ID = "eternalcoloniescompat";
-    private static final Logger LOG = LoggerFactory.getLogger("EternalColoniesCompat");
+    public static final Logger LOG = LoggerFactory.getLogger("EternalColoniesCompat");
     private static final ResourceLocation TOOL_ID = ResourceLocation.fromNamespaceAndPath("eternaltool", "eternal_tool");
 
     public EternalColoniesCompat(IEventBus modBus, ModContainer container) {
         container.registerConfig(ModConfig.Type.SERVER, CompatConfig.SPEC);
         NeoForge.EVENT_BUS.addListener(this::onServerStarted);
+        NeoForge.EVENT_BUS.addListener(CitizenCombatXp::onLivingDeath);
     }
 
     private void onServerStarted(ServerStartedEvent event) {
